@@ -1,0 +1,90 @@
+@import '../assets/variables';
+@import '../assets/mixins';
+
+.home {
+  padding: 2rem;
+
+  .filters {
+    @include flex-row(1rem);
+  }
+
+  .movie-table {
+    max-width: 1200px;
+    .title {
+      min-width: 60%;
+    }
+    .table-row {
+      //remove flaky feel with transition
+      opacity: 1;
+      transition: opacity 0.3s ease;
+
+      &.fade-in {
+        opacity: 0;
+      }
+
+      &:hover{
+        background-color: $primary-color;
+      }
+
+      display: flex;
+      padding: 12px 8px;
+      border-bottom: 1px solid $border-color;
+      border-left: 1px solid $border-color;
+      border-right: 1px solid $border-color;
+      cursor: pointer;
+  
+      &.header {
+        font-weight: bold;
+        background: $header-bg;
+      }
+  
+      .col {
+        flex: 1;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  
+    .skeleton-row {
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .skeleton-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: none;
+    }
+
+    //remove flaky feel with min height
+    min-height: 500px; // or exact height of 10 rows
+    transition: all 0.2s ease;
+  }
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0 10px 0;
+  gap: 12px;
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
+.no-results {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+}
+
+.row-container {
+  transition: opacity 0.3s ease;
+}
+
+.row-container.skeleton-mode {
+  opacity: 0.9;
+}
