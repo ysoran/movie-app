@@ -1,13 +1,13 @@
 @import '../assets/variables';
 
 .movie-detail {
-  padding: $padding;
+  padding: $home-padding;
 
   .breadcrumb {
     margin-bottom: 1rem;
 
     a {
-      color: #1976d2;
+      color: $button-bg;
       text-decoration: none;
       font-weight: 500;
 

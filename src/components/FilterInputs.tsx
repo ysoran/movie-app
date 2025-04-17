@@ -1,6 +1,15 @@
 import { MenuItem, Select, TextField } from "@mui/material";
 
-export const FilterInputs = ({ search, year, type, onSearch, onYear, onType }: any) => (
+export const FilterInputs = (
+        { search, year, type, onSearch, onYear, onType } :
+        {   
+            search: string, 
+            year: string, 
+            type: string, 
+            onSearch: (val: string) => void, 
+            onYear: (val: string) => void, 
+            onType: (val: string) => void 
+        }) => (
     <div className="filters">
       <TextField label="Search" value={search} onChange={(e) => onSearch(e.target.value)} />
       <TextField label="Year" value={year} onChange={(e) => onYear(e.target.value)} />
