@@ -38,7 +38,7 @@ export const fetchMovies = createAsyncThunk<
         `http://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&y=${year}&type=${type}&page=${page}`
       );
 
-      if (response.data.Response === 'False') {
+      if (response.data.Response === 'False' && response.data.Error!=="Movie not found!") {
         return rejectWithValue(response.data.Error || 'Unknown error from OMDb API');
       }
 
@@ -47,6 +47,13 @@ export const fetchMovies = createAsyncThunk<
         totalResults: parseInt(response.data.totalResults) || 0,
       };
     } catch (error: any) {
+        if(error.response.data.Error!=="Movie not found!") {
+            return {
+                movies: [],
+                totalResults: 0,
+            };
+        }
+
         if (error.response && error.response.data && error.response.data.Error) {
             return rejectWithValue(error.response.data.Error);
           }

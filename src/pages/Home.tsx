@@ -27,7 +27,9 @@ function Home() {
 
   // Fetch with debounce
   useEffect(() => {
-    debounceRef.current();
+    if (search.length >= 3) {
+      debounceRef.current();
+    }
     return debounceRef.current.cancel;
   }, [search, year, type, page]);
 

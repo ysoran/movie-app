@@ -88,3 +88,10 @@
 .row-container.skeleton-mode {
   opacity: 0.9;
 }
+
+.warning{
+  background-color: $header-bg;
+  padding: 20px;
+  margin: 20px 0;
+  max-width: 1160px;
+}
