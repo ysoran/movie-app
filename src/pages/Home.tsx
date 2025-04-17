@@ -12,11 +12,12 @@ import _ from 'lodash';
 import './Home.scss';
 import { FilterInputs } from '../components/FilterInputs';
 import { MovieTable } from '../components/MovieTable';
+import ErrorPage from '../components/ErrorPage';
 
 function Home() {
     const dispatch = useDispatch<AppDispatch>();
 
-  const { search, year, type, page, movies, totalResults, loading } = useSelector(
+  const { search, year, type, page, movies, totalResults, loading, error } = useSelector(
     (state: RootState) => state.movies
   );
 
@@ -62,7 +63,8 @@ function Home() {
         onType={handleTypeChange}
       />
 
-      <MovieTable showSkeleton={showSkeleton} movies={movies} totalResults={totalResults} page={page} />
+      {!error && <MovieTable showSkeleton={showSkeleton} movies={movies} totalResults={totalResults} page={page} />}
+      {error && <ErrorPage error={error} />}
     </div>
   );
 }

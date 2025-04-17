@@ -24,16 +24,35 @@ const initialState: MovieState = {
   error: null,
 };
 
-export const fetchMovies = createAsyncThunk(
+export const fetchMovies = createAsyncThunk<
+  { movies: Movie[]; totalResults: number },
+  void,
+  { state: { movies: MovieState }; rejectValue: string }
+>(
   'movies/fetchMovies',
-  async (_, { getState }: any) => {
-    const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
-    const { search, year, type, page } = getState().movies;
-    const response = await axios.get(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&y=${year}&type=${type}&page=${page}`);
-    return {
-      movies: response.data.Search || [],
-      totalResults: parseInt(response.data.totalResults) || 0,
-    };
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
+      const { search, year, type, page } = getState().movies;
+      const response = await axios.get(
+        `http://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&y=${year}&type=${type}&page=${page}`
+      );
+
+      if (response.data.Response === 'False') {
+        return rejectWithValue(response.data.Error || 'Unknown error from OMDb API');
+      }
+
+      return {
+        movies: response.data.Search || [],
+        totalResults: parseInt(response.data.totalResults) || 0,
+      };
+    } catch (error: any) {
+        if (error.response && error.response.data && error.response.data.Error) {
+            return rejectWithValue(error.response.data.Error);
+          }
+    
+        return rejectWithValue(error.message || 'Unknown error occurred');
+    }
   }
 );
 
@@ -67,10 +86,11 @@ const movieSlice = createSlice({
         state.loading = false;
         state.movies = action.payload.movies;
         state.totalResults = action.payload.totalResults;
+        state.error = null;
       })
       .addCase(fetchMovies.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch';
+        state.error = action.payload || 'Failed to fetch movies';
       });
   },
 });
