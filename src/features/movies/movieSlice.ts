@@ -27,8 +27,9 @@ const initialState: MovieState = {
 export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',
   async (_, { getState }: any) => {
+    const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
     const { search, year, type, page } = getState().movies;
-    const response = await axios.get(`http://www.omdbapi.com/?apikey=5a981d8a&s=${search}&y=${year}&type=${type}&page=${page}`);
+    const response = await axios.get(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&y=${year}&type=${type}&page=${page}`);
     return {
       movies: response.data.Search || [],
       totalResults: parseInt(response.data.totalResults) || 0,

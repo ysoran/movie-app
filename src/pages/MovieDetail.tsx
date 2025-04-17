@@ -11,9 +11,10 @@ function MovieDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
     setLoading(true);
     axios
-      .get(`http://www.omdbapi.com/?apikey=5a981d8a&i=${imdbID}`)
+      .get(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`)
       .then((res) => {
         if (res.data?.Response === 'True') {
           setMovie(res.data);
