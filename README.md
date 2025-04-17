@@ -45,7 +45,7 @@ git clone https://github.com/ysoran/movie-spa.git
 2. Navigate to the project folder:
 
 ```bash
-cd movie-spa
+cd movie-app
 ```
 
 3. Install dependencies:
