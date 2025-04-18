@@ -41,7 +41,7 @@ https://github.com/user-attachments/assets/6093149d-e074-42dd-ab70-9c6f08ec8da5
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/ysoran/movie-spa.git
+git clone https://github.com/ysoran/movie-app.git
 ```
 
 2. Navigate to the project folder:
