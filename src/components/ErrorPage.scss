@@ -1,8 +1,10 @@
+@import '../assets/variables';
+
 .error-page {
     padding: 2rem;
     text-align: center;
-    color: #fff;
-    background-color: #d32f2f;
+    color: $error-foreground;
+    background-color: $error-bg;
     border-radius: 12px;
     max-width: 500px;
     margin: 4rem auto;
