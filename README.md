@@ -165,7 +165,6 @@ src/
 - Uses **SCSS** for flexible styling.
 - **Redux Toolkit** manages global state.
 - End-to-end testing is done with **Playwright**.
-- Consider setting up a backend proxy for OMDb API to avoid CORS issues.
 
 ---
 
