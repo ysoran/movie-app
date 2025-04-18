@@ -1,4 +1,3 @@
-// tests/e2e/home.spec.ts
 import { test, expect } from '@playwright/test';
 
 test.describe('Home Page', () => {
@@ -14,18 +13,10 @@ test.describe('Home Page', () => {
   });
 
   test('allows user to search and load results', async ({ page }) => {
-    await page.goto('/'); // if your dev server is running at localhost:3000, use page.goto('http://localhost:3000');
-  
-    // Fill the search input
+    await page.goto('/');
     await page.getByLabel('Search').fill('Batman');
-  
-    // Wait until one of the result rows appears (ignoring skeletons and headers)
     await page.waitForSelector('.table-row >> text=Batman', { timeout: 5000 });
-  
-    // Get all result rows (excluding headers)
     const resultRows = page.locator('.row-container .table-row:not(.header)');
-  
-    // Assert that at least one row contains the text 'Batman'
     const rowsCount = await resultRows.count();
     let found = false;
   
@@ -37,8 +28,6 @@ test.describe('Home Page', () => {
         break;
       }
     }
-  
-    // Assert that at least one row contains "Batman"
     expect(found).toBe(true);
   });
   
