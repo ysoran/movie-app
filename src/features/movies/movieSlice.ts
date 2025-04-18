@@ -47,7 +47,7 @@ export const fetchMovies = createAsyncThunk<
         totalResults: parseInt(response.data.totalResults) || 0,
       };
     } catch (error: any) {
-        if(error.response.data.Error!=="Movie not found!") {
+        if(error.response.data.Error==="Movie not found!") {
             return {
                 movies: [],
                 totalResults: 0,
