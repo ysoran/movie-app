@@ -2,6 +2,8 @@
 
 A simple Single Page Application (SPA) built with React and TypeScript to search, list, and view detailed information about movies using the [OMDb API](http://www.omdbapi.com/).
 
+https://github.com/user-attachments/assets/6093149d-e074-42dd-ab70-9c6f08ec8da5
+
 ---
 
 ## ✨ Features
